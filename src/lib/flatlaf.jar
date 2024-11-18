@@ -1,0 +1,11 @@
+// In ThemedButton.java
+import javax.swing.JButton;
+
+public class ThemedButton extends JButton {
+    public ThemedButton(String text) {
+        super(text);
+        setBackground(FlatLaf.isDark() ? Color.DARK_GRAY : Color.LIGHT_GRAY);
+        setForeground(Color.WHITE);
+        setBorderPainted(false);
+    }
+}

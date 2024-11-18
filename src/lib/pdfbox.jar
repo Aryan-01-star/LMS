@@ -1,0 +1,33 @@
+package service;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import java.io.IOException;
+import model.Book;
+
+public class PDFReportService {
+
+    public void exportBookListToPDF(List<Book> books, String filePath) {
+        try (PDDocument document = new PDDocument()) {
+            PDPage page = new PDPage();
+            document.addPage(page);
+
+            PDPageContentStream contentStream = new PDPageContentStream(document, page);
+            contentStream.beginText();
+            contentStream.setFont(PDType1Font.HELVETICA, 12);
+            contentStream.newLineAtOffset(50, 700);
+            contentStream.showText("Library Books Report");
+            
+            for (Book book : books) {
+                contentStream.newLine();
+                contentStream.showText("Title: " + book.getTitle() + " Author: " + book.getAuthor());
+            }
+            contentStream.endText();
+            contentStream.close();
+            document.save(filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
