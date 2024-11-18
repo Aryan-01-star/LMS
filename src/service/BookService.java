@@ -16,6 +16,10 @@ public class BookService {
             .addAnnotatedClass(Book.class)
             .buildSessionFactory();
 
+    /**
+     * Retrieves all books from the database.
+     * @return List of all books or null if an error occurs.
+     */
     public List<Book> getAllBooks() {
         try (Session session = factory.openSession()) {
             session.beginTransaction();
@@ -28,6 +32,11 @@ public class BookService {
         }
     }
 
+    /**
+     * Searches for books by title or author.
+     * @param query Search query for title or author.
+     * @return List of matching books or null if an error occurs.
+     */
     public List<Book> searchBooks(String query) {
         try (Session session = factory.openSession()) {
             session.beginTransaction();
@@ -42,6 +51,11 @@ public class BookService {
         }
     }
 
+    /**
+     * Adds a new book to the database.
+     * @param book Book to add.
+     * @return true if the operation is successful, false otherwise.
+     */
     public boolean addBook(Book book) {
         try (Session session = factory.openSession()) {
             session.beginTransaction();
@@ -54,6 +68,49 @@ public class BookService {
         }
     }
 
+    /**
+     * Updates an existing book in the database.
+     * @param book Book to update.
+     * @return true if the operation is successful, false otherwise.
+     */
+    public boolean updateBook(Book book) {
+        try (Session session = factory.openSession()) {
+            session.beginTransaction();
+            session.update(book);
+            session.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            logger.error("Error updating book: ", e);
+            return false;
+        }
+    }
+
+    /**
+     * Deletes a book from the database.
+     * @param bookId ID of the book to delete.
+     * @return true if the operation is successful, false otherwise.
+     */
+    public boolean deleteBook(int bookId) {
+        try (Session session = factory.openSession()) {
+            session.beginTransaction();
+            Book book = session.get(Book.class, bookId);
+            if (book != null) {
+                session.delete(book);
+                session.getTransaction().commit();
+                return true;
+            } else {
+                logger.warn("Book not found with ID: " + bookId);
+                return false;
+            }
+        } catch (Exception e) {
+            logger.error("Error deleting book: ", e);
+            return false;
+        }
+    }
+
+    /**
+     * Closes the SessionFactory.
+     */
     public static void closeFactory() {
         if (factory != null) {
             factory.close();

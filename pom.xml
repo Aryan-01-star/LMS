@@ -1,7 +1,73 @@
 <dependencies>
+    <!-- SLF4J Logger for logging -->
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>2.0.0</version> <!-- Make sure this matches your SLF4J version -->
+    </dependency>
+
+    <!-- Logback for SLF4J Logging Implementation -->
+    <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>1.4.11</version> <!-- Or the latest stable version -->
+    </dependency>
+
+    <!-- Hibernate for ORM -->
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>5.6.14.Final</version> <!-- Or the latest stable version -->
+    </dependency>
+
+    <!-- Hibernate Validator (for bean validation) -->
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>6.2.0.Final</version> <!-- Or the latest stable version -->
+    </dependency>
+
+    <!-- Apache POI for Excel file generation -->
+    <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-ooxml</artifactId>
+        <version>5.2.3</version> <!-- Or the latest stable version -->
+    </dependency>
+
+    <!-- QR Code generation library -->
+    <dependency>
+        <groupId>net.glxn</groupId>
+        <artifactId>qrgen</artifactId>
+        <version>2.6.0</version> <!-- Or the latest stable version -->
+    </dependency>
+
+    <!-- JSON Web Token (JWT) for authentication -->
     <dependency>
         <groupId>com.auth0</groupId>
         <artifactId>java-jwt</artifactId>
-        <version>4.2.1</version>
+        <version>4.2.1</version> <!-- Or the latest stable version -->
     </dependency>
+
+    <!-- Apache Commons Lang (Optional, for additional utility methods) -->
+    <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.12.0</version> <!-- Or the latest stable version -->
+    </dependency>
+
+    <!-- JUnit for Unit Testing (optional, useful for testing your services) -->
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>5.7.2</version> <!-- Or the latest stable version -->
+        <scope>test</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>5.7.2</version> <!-- Or the latest stable version -->
+        <scope>test</scope>
+    </dependency>
+
 </dependencies>
