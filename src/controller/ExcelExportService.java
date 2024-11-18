@@ -10,7 +10,7 @@ public class ExcelExportService {
             Row header = sheet.createRow(0);
             header.createCell(0).setCellValue("Title");
             header.createCell(1).setCellValue("Author");
-            
+
             int rowIdx = 1;
             for (Book book : books) {
                 Row row = sheet.createRow(rowIdx++);
@@ -18,6 +18,7 @@ public class ExcelExportService {
                 row.createCell(1).setCellValue(book.getAuthor());
             }
             workbook.write(fileOut);
+            System.out.println("Books exported successfully to " + filePath);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -6,21 +6,52 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
 
 public class AuthService {
-    private static final String SECRET = "your_secret_key";
-    
+    private static final String SECRET = "your_secret_key"; // Replace with a secure key
+
+    /**
+     * Generates a JWT token for the given user ID.
+     * @param userId The user ID for which the token is generated.
+     * @return A signed JWT token.
+     */
     public String generateToken(String userId) {
         return JWT.create()
                 .withSubject(userId)
                 .sign(Algorithm.HMAC256(SECRET));
     }
 
+    /**
+     * Verifies the provided JWT token.
+     * @param token The token to verify.
+     * @return True if the token is valid, false otherwise.
+     */
     public boolean verifyToken(String token) {
         JWTVerifier verifier = JWT.require(Algorithm.HMAC256(SECRET)).build();
         try {
             DecodedJWT jwt = verifier.verify(token);
+            System.out.println("Token verified for user: " + jwt.getSubject());
             return jwt.getSubject() != null;
         } catch (Exception e) {
+            System.err.println("Invalid token: " + e.getMessage());
             return false;
         }
+    }
+
+    // Main method for testing the AuthService
+    public static void main(String[] args) {
+        AuthService authService = new AuthService();
+
+        // Generate a token for a user
+        String userId = "user123";
+        String token = authService.generateToken(userId);
+        System.out.println("Generated Token: " + token);
+
+        // Verify the token
+        boolean isValid = authService.verifyToken(token);
+        System.out.println("Is token valid? " + isValid);
+
+        // Test with an invalid token
+        String fakeToken = token + "tampered";
+        boolean isFakeValid = authService.verifyToken(fakeToken);
+        System.out.println("Is fake token valid? " + isFakeValid);
     }
 }
