@@ -44,6 +44,3 @@ As this is an ongoing project, contributions are welcome. If you find any bugs o
 
 ## Note
 This project is still in progress, so there may be some unfinished features or bugs. If you encounter issues, I would greatly appreciate any contributions or fixes to improve the codebase.
-
-### License
-This project is open-source and available under the MIT License.
